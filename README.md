@@ -37,7 +37,6 @@ and then somewhere in your `configuration.nix`:
 
 I think this can be skipped if this repo is added to your nix configuration flake thingy but *ymmv*
 
-right now I use `system="x86_64-linux"` but I need to change this to something that generates for different systems. Maybe make a fork if yall want.
 
 # Credits
 https://github.com/kvnesterov/binary_ninja_nixos
