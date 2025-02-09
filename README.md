@@ -1,19 +1,14 @@
 # Decription
 
-NixOS package file for the [Binary Ninja](https://binary.ninja/) personal version. Since distribuition based on personal links, package is targeting local file with name `binaryninja_personal_linux.zip`.
+NixOS package file for the [Binary Ninja](https://binary.ninja/) free version. ~~Since distribuition based on personal links, package is targeting local file with name `binaryninja_personal_linux.zip`.~~ We no longer need personal version, but a free version, using the wayback archive!
 
 # Install example
+
+## manual profile install
 ```shell
 git clone https://github.com/kvnesterov/binary_ninja_nixos.git
-cd binary_ninja_nixos
-cp $(BINARY_NINJA_LINUX_ZIP_LOCATION)/binaryninja_personal_linux.zip .
-```
-and then either:
-
-```shell
 ./install.sh
 ```
-
 which is just a fancy version of: 
 
 ```shell
@@ -21,7 +16,28 @@ nix build
 nix profile install ./result
 ```
 
-This installs to nix profile (`nix profile list` to see all profile installs). I think this can be skipped if this repo is added to your nix configuration flake thingy but *ymmv*
+This installs to nix profile (`nix profile list` to see all profile installs). 
+
+## global install 
+
+add to `flake.nix`:
+
+```nix
+    inputs.binja.url =  "github:yadobler/binary_ninja_nixos";
+```
+
+and then somewhere in your `configuration.nix`:
+```nix
+  environment.systemPackages = with pkgs; [
+    inputs.binaryninja.packages.${system}.default
+      ...
+  ];
+```
+
+
+I think this can be skipped if this repo is added to your nix configuration flake thingy but *ymmv*
+
+right now I use `system="x86_64-linux"` but I need to change this to something that generates for different systems. Maybe make a fork if yall want.
 
 # Credits
 https://github.com/kvnesterov/binary_ninja_nixos
