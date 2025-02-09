@@ -7,5 +7,21 @@ NixOS package file for the [Binary Ninja](https://binary.ninja/) personal versio
 git clone https://github.com/kvnesterov/binary_ninja_nixos.git
 cd binary_ninja_nixos
 cp $(BINARY_NINJA_LINUX_ZIP_LOCATION)/binaryninja_personal_linux.zip .
-nix-env -i -f  default.nix
 ```
+and then either:
+
+```shell
+./install.sh
+```
+
+which is just a fancy version of: 
+
+```shell
+nix build
+nix profile install ./result
+```
+
+This installs to nix profile (`nix profile list` to see all profile installs). I think this can be skipped if this repo is added to your nix configuration flake thingy but *ymmv*
+
+# Credits
+https://github.com/kvnesterov/binary_ninja_nixos
