@@ -9,13 +9,16 @@ stdenv.mkDerivation rec {
   buildPhase = ":";
   installPhase = ''
     mkdir -p $out/bin
-    makeWrapper $src/binaryninja \
+    mkdir -p $out/opt
+    cp $src/* $out/opt -r
+    chmod +x $out/opt/binaryninja
+    makeWrapper $out/opt/binaryninja \
           $out/bin/binaryninja \
           --prefix "QT_QPA_PLATFORM" ":" "wayland"
   '';
 
   postFixup = ''
-    # patchelf --debug --add-needed libpython3.so \
-    #   "$out/opt/binaryninja"
+    patchelf --debug --add-needed libpython3.so \
+      "$out/opt/binaryninja"
   '';
 }
